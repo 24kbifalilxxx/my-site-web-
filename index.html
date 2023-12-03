@@ -1,1 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localisation et IP</title>
+</head>
+<body>
+    <h1>Partagez votre localisation</h1>
+    <button onclick="getLocation()">Partager la localisation</button>
+
+    <p id="location"></p>
+    <p id="ip"></p>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("La géolocalisation n'est pas prise en charge par votre navigateur.");
+            }
+        }
+
+        function showPosition(position) {
+            const locationElement = document.getElementById("location");
+            locationElement.innerHTML = `Votre position :<br>Latitude: ${position.coords.latitude}<br>Longitude: ${position.coords.longitude}`;
+            
+            // En JavaScript côté client, vous ne pouvez pas obtenir l'adresse IP directement.
+            // Vous devrez utiliser un service tiers pour obtenir l'adresse IP.
+            // Par exemple, vous pourriez faire une requête à un service d'API REST pour obtenir l'adresse IP.
+
+            // Exemple hypothétique avec un service tiers pour obtenir l'adresse IP :
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ipElement = document.getElementById("ip");
+                    ipElement.innerHTML = `Votre adresse IP : ${data.ip}`;
+                })
+                .catch(error => console.error("Erreur lors de la récupération de l'adresse IP :", error));
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Permission refusée pour la géolocalisation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("L'information sur la position n'est pas disponible.");
+                    break;
+                case error.TIMEOUT:
+                    alert("La demande de géolocalisation a expiré.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("Une erreur inconnue s'est produite.");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
 
