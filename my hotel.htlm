@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réservation d'hôtel</title>
+</head>
+<body>
+
+  <h1>Réservation d'hôtel</h1>
+
+  <form id="reservationForm">
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" required><br>
+
+    <label for="dateArrivee">Date d'arrivée:</label>
+    <input type="date" id="dateArrivee" name="dateArrivee" required><br>
+
+    <label for="dateDepart">Date de départ:</label>
+    <input type="date" id="dateDepart" name="dateDepart" required><br>
+
+    <button type="button" onclick="effectuerReservation()">Réserver</button>
+  </form>
+
+  <div id="resultatReservation"></div>
+
+  <script>
+    function effectuerReservation() {
+      var nom = document.getElementById('nom').value;
+      var dateArrivee = document.getElementById('dateArrivee').value;
+      var dateDepart = document.getElementById('dateDepart').value;
+
+      // Ici, vous pouvez envoyer ces informations à votre backend pour traiter la réservation
+      // Par exemple, en utilisant fetch() pour envoyer une requête POST
+
+      // Afficher un message de confirmation (c'est ici que vous devrez implémenter la logique côté serveur)
+      var resultat = document.getElementById('resultatReservation');
+      resultat.innerHTML = `Réservation effectuée pour ${nom} du ${dateArrivee} au ${dateDepart}.`;
+    }
+  </script>
+
+</body>
+</html>
